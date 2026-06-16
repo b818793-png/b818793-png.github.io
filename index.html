@@ -1,0 +1,453 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高雄經典地標 — 文化．歷史．交通指南</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+    background: #0b0e14;
+    color: #e8edf5;
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+  .hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(135deg, #0f172a 0%, #1a2332 50%, #0d1b2a 100%);
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 20% 50%, rgba(0,180,216,0.15) 0%, transparent 50%), radial-gradient(ellipse at 80% 30%, rgba(247,127,0,0.10) 0%, transparent 50%), radial-gradient(ellipse at 50% 80%, rgba(114,9,183,0.10) 0%, transparent 50%);
+    z-index: 1;
+  }
+  .hero-content { position: relative; z-index: 2; padding: 2rem; }
+  .hero h1 {
+    font-size: clamp(2.8rem, 8vw, 6rem);
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    background: linear-gradient(135deg, #fca311, #ffb703, #fca311);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+  }
+  .hero p {
+    font-size: clamp(1rem, 2.5vw, 1.6rem);
+    font-weight: 300;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.3em;
+  }
+  .hero-scroll {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    z-index: 2; color: rgba(255,255,255,0.4); font-size: 0.85rem; letter-spacing: 0.2em;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(10px); }
+  }
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(11,14,20,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06); padding: 0 1rem;
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto; display: flex; gap: 0;
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav a {
+    flex: 1; min-width: 120px; padding: 0.9rem 0.5rem; text-align: center;
+    text-decoration: none; color: rgba(255,255,255,0.55); font-size: 0.9rem;
+    font-weight: 500; letter-spacing: 0.06em; border-bottom: 2px solid transparent;
+    transition: all 0.25s; white-space: nowrap;
+  }
+  .nav a:hover, .nav a.active { color: #fca311; border-bottom-color: #fca311; }
+  section { padding: 5rem 1rem; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .section-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700;
+    margin-bottom: 0.3rem; letter-spacing: 0.04em;
+  }
+  .section-sub {
+    font-size: 1rem; color: rgba(255,255,255,0.4);
+    margin-bottom: 3rem; letter-spacing: 0.15em;
+  }
+  .card-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2rem;
+  }
+  .card {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px; padding: 1.8rem 1.8rem 2.2rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+  .card-icon { font-size: 2rem; margin-bottom: 0.6rem; display: block; }
+  .card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.6rem; color: #fca311; }
+  .card p, .card li { font-size: 0.95rem; color: rgba(255,255,255,0.78); font-weight: 300; }
+  .card ul { list-style: none; padding: 0; }
+  .card li { padding: 0.3rem 0; padding-left: 1.2rem; position: relative; }
+  .card li::before { content: ''; position: absolute; left: 0; color: #fca311; font-weight: 700; }
+  .spot-intro {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+    align-items: center; margin-bottom: 3rem;
+  }
+  .spot-intro.reverse { direction: rtl; }
+  .spot-intro.reverse > * { direction: ltr; }
+  .spot-visual {
+    aspect-ratio: 4 / 3; border-radius: 16px; overflow: hidden;
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .spot-visual img {
+    width: 100%; height: 100%; object-fit: cover;
+    display: block;
+  }
+  .spot-visual .label {
+    position: absolute; bottom: 1rem; left: 1rem;
+    background: rgba(0,0,0,0.6); padding: 0.3rem 1rem; border-radius: 20px;
+    font-size: 0.75rem; color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.1);
+  }
+  .spot-text h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; margin-bottom: 0.3rem; }
+  .spot-text .en {
+    font-size: 0.9rem; color: rgba(255,255,255,0.3);
+    letter-spacing: 0.1em; margin-bottom: 1rem; font-weight: 300;
+  }
+  .spot-text p { color: rgba(255,255,255,0.75); font-weight: 300; margin-bottom: 0.6rem; }
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 6px; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(to bottom, #fca311, transparent);
+  }
+  .tl-item { position: relative; margin-bottom: 1.4rem; }
+  .tl-item::before {
+    content: ''; position: absolute; left: -2rem; top: 0.5rem;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: #fca311; border: 2px solid #0b0e14;
+  }
+  .tl-item .year { font-weight: 700; color: #fca311; font-size: 0.95rem; }
+  .tl-item p { color: rgba(255,255,255,0.7); font-weight: 300; font-size: 0.9rem; }
+  .transport-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem;
+  }
+  .tp-item {
+    background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px; padding: 1.2rem 1.4rem;
+  }
+  .tp-item .mode { font-weight: 700; font-size: 1rem; margin-bottom: 0.3rem; color: #ffb703; }
+  .tp-item p { font-size: 0.88rem; color: rgba(255,255,255,0.65); font-weight: 300; }
+  .sub-header { font-size: 1.4rem; font-weight: 700; margin: 2rem 0 1rem; color: #ffb703; letter-spacing: 0.04em; }
+  @media (max-width: 768px) {
+    .spot-intro { grid-template-columns: 1fr; gap: 1.5rem; }
+    .spot-intro.reverse { direction: ltr; }
+    .card-grid { grid-template-columns: 1fr; }
+    .nav a { font-size: 0.78rem; min-width: 90px; }
+    section { padding: 3rem 1rem; }
+  }
+  footer {
+    text-align: center; padding: 3rem 1rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    color: rgba(255,255,255,0.25); font-size: 0.85rem; font-weight: 300;
+  }
+</style>
+</head>
+<body>
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-content">
+    <h1>港都經典</h1>
+    <p>高雄流行音樂中心 · 蓮池潭龍虎塔 · 85 大樓</p>
+    <p style="margin-top:0.6rem; font-size:0.9rem; color:rgba(255,255,255,0.3); letter-spacing:0.15em; font-weight:300;">建築一甲91422127</p>
+  </div>
+  <div class="hero-scroll">▼ 探索</div>
+</header>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="kpmc.html">高雄流行音樂中心</a>
+    <a href="lotus.html">蓮池潭龍虎塔</a>
+    <a href="85.html">85 大樓</a>
+    <a href="#route">交通動線總覽</a>
+    <a href="reflection.html">課堂心得</a>
+  </div>
+</nav>
+<!-- KPMC -->
+<section id="kpmc">
+<div class="section-inner">
+  <div class="spot-intro">
+    <div class="spot-visual"><img src="P001.png" alt="高雄流行音樂中心"><div class="label">Kaohsiung Music Center</div></div>
+    <div class="spot-text">
+      <h2>高雄流行音樂中心</h2>
+      <div class="en">Kaohsiung Music Center</div>
+      <p>座落於高雄港 11–15 號碼頭（真愛碼頭、光榮碼頭），佔地約 11.89 公頃。由西班牙建築師 Manuel Alvarez Monteserin Lahoz 與台灣翁祖模建築師事務所聯手設計，以「海洋」為核心語彙，打造出音浪塔、鯨魚堤岸、珊瑚礁群、海豚步道等造型前衛的建築群，2021 年正式開幕後旋即成為港都最耀眼的門戶地標。</p>
+      <p style="margin-top:1rem;"><a href="kpmc.html" style="display:inline-block; padding:0.4rem 1.6rem; border:1px solid rgba(252,163,17,0.3); border-radius:30px; color:#fca311; text-decoration:none; font-size:0.85rem; letter-spacing:0.05em; transition:all 0.25s;" onmouseover="this.style.background='rgba(252,163,17,0.1)';" onmouseout="this.style.background='transparent';">完整介紹 →</a></p>
+    </div>
+  </div>
+  <div class="card-grid">
+    <div class="card">
+      <span class="card-icon">&#x1F4DC;</span>
+      <h3>歷史沿革</h3>
+      <div class="timeline">
+        <div class="tl-item"><span class="year">2003</span><p>行政院核定「新十大建設」，南部流行音樂中心列入規劃</p></div>
+        <div class="tl-item"><span class="year">2009</span><p>更名「海洋文化及流行音樂中心」，遷址至高雄港 11–15 號碼頭</p></div>
+        <div class="tl-item"><span class="year">2011</span><p>國際競圖由西班牙 Lahoz 團隊獲首獎，三月簽約</p></div>
+        <div class="tl-item"><span class="year">2014–2020</span><p>第一、二階段工程陸續動工、竣工，總經費約 69.56 億元</p></div>
+        <div class="tl-item"><span class="year">2021.10.31</span><p>正式開幕，總統蔡英文、市長陳其邁揭幕；同年舉辦第 12 屆金音創作獎</p></div>
+        <div class="tl-item"><span class="year">2024–迄今</span><p>推出常設互動展，全年超過百場演唱會，成為南台灣音樂重鎮</p></div>
+      </div>
+    </div>
+    <div class="card">
+      <span class="card-icon">&#x1F3DB;&#xFE0F;</span>
+      <h3>人文特色</h3>
+      <ul>
+        <li>全台唯一 3D 沉浸式音響室內展演館——海音館（4,000–6,000 人）</li>
+        <li>海風廣場可容納 8,000–10,000 人戶外演出，南台灣最大流行音樂聚落</li>
+        <li>鯨魚堤岸六棟獨立展演空間（200–1,000 席）：電競館、沉浸式劇院、原民餐廳</li>
+        <li>珊瑚礁群、海豚步道串聯文創商業與遊艇碼頭，形成水岸生活廊帶</li>
+        <li>行政法人營運，培養在地音樂人才、鏈結亞洲流行音樂網絡</li>
+        <li>2021 年獲全球卓越建設金獎，建築以鯨豚、珊瑚、海浪為設計母題</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="card-icon">&#x1F30D;</span>
+      <h3>地理區位</h3>
+      <p>位於高雄港愛河出海口兩側，橫跨鹽埕區真愛路與苓雅區海邊路。西接駁二藝術特區，東鄰高雄展覽館與新光碼頭，北連愛河自行車道，南臨高雄港主航道。輕軌真愛碼頭站與光榮碼頭站貫穿園區。</p>
+      <p style="margin-top:0.8rem;"><strong>地址：</strong>高雄市鹽埕區真愛路 1 號</p>
+    </div>
+  </div>
+  <h3 class="sub-header">交通方式</h3>
+  <div class="transport-grid">
+    <div class="tp-item"><div class="mode">輕軌</div><p>C11 真愛碼頭站、C10 光榮碼頭站，出站即達</p></div>
+    <div class="tp-item"><div class="mode">捷運</div><p>紅線 R8 三多商圈站 1 號出口轉紅 18；或 R9 中央公園站轉 100 號公車</p></div>
+    <div class="tp-item"><div class="mode">公車</div><p>大成街口（11、25、33、50、214A/B、0 南北）；高雄女中（77、168 環狀）</p></div>
+    <div class="tp-item"><div class="mode">YouBike</div><p>珊瑚礁群、音浪塔、LIVE WAREHOUSE 旁皆有站點</p></div>
+    <div class="tp-item"><div class="mode">開車</div><p>真愛路停車場 239 格、海邊路停車場 24h</p></div>
+  </div>
+</div>
+</section>
+<!-- LOTUS POND -->
+<section id="lotus" style="background: rgba(255,255,255,0.015);">
+<div class="section-inner">
+  <div class="spot-intro reverse">
+    <div class="spot-visual"><img src="P002.png" alt="蓮池潭龍虎塔"><div class="label">Dragon &amp; Tiger Pagodas</div></div>
+    <div class="spot-text">
+      <h2>蓮池潭 · 龍虎塔</h2>
+      <div class="en">Lotus Pond — Dragon &amp; Tiger Pagodas</div>
+      <p>位於左營區，南鄰龜山、北倚半屏山，潭面約 42 公頃。清領時期即為「鳳山八景」之一——泮水荷香。1976 年左營慈濟宮奉保生大帝旨意興建龍虎雙塔，七層樓高、以九曲橋凌波相連，「龍口進、虎口出」象徵消災解厄、趨吉避凶。CNN 2014 年列為「愛上高雄十大理由」，國際巨星訪高必訪景點。</p>
+      <p style="margin-top:1rem;"><a href="lotus.html" style="display:inline-block; padding:0.4rem 1.6rem; border:1px solid rgba(252,163,17,0.3); border-radius:30px; color:#fca311; text-decoration:none; font-size:0.85rem; letter-spacing:0.05em; transition:all 0.25s;" onmouseover="this.style.background='rgba(252,163,17,0.1)';" onmouseout="this.style.background='transparent';">完整介紹 →</a></p>
+    </div>
+  </div>
+  <div class="card-grid">
+    <div class="card">
+      <span class="card-icon">&#x1F4DC;</span>
+      <h3>歷史沿革</h3>
+      <div class="timeline">
+        <div class="tl-item"><span class="year">1686</span><p>鳳山知縣楊芳聲建文廟，以蓮池潭為泮池、遍植荷花，「泮水荷香」名列鳳山八景</p></div>
+        <div class="tl-item"><span class="year">1705</span><p>知縣宋永清濬修；1842 年曹瑾擴建開圳引水灌溉千餘甲農田</p></div>
+        <div class="tl-item"><span class="year">1953</span><p>春秋閣興建，紀念關公與孔子作春秋，潭畔最早的大型人工景觀</p></div>
+        <div class="tl-item"><span class="year">1974</span><p>左營慈濟宮保生大帝降駕指示將有災難，信徒發願興建龍虎塔鎮災</p></div>
+        <div class="tl-item"><span class="year">1976</span><p>龍虎雙塔完工；隔年賽洛瑪颱風重創南台灣，雙塔成為避難所</p></div>
+        <div class="tl-item"><span class="year">2023–2024</span><p>全面修復完工，強化夜間燈光、增設多國語音導覽牆</p></div>
+      </div>
+    </div>
+    <div class="card">
+      <span class="card-icon">&#x1F3DB;&#xFE0F;</span>
+      <h3>人文特色</h3>
+      <ul>
+        <li><strong>入龍喉、出虎口</strong>：龍塔繪二十四孝圖、十殿閻王圖，虎塔繪七十二賢士與三十六官將</li>
+        <li>環潭 500 公尺內 20 餘座寺廟，台灣寺廟最密集區域（孔廟、啟明堂、慈濟宮、元帝廟等）</li>
+        <li>春秋閣騎龍觀音聖像流傳觀音菩薩顯靈傳說，為地方重要信仰</li>
+        <li>每年左營萬年季（十月）廟宇繞境、火獅祈福，高雄最大宗教文化節慶</li>
+        <li>潭面設生態島、環潭步道、親水座階，獲金質獎環境營造工程肯定</li>
+        <li>全台首座國際標準纜繩滑水場「蓮潭滑水主題樂園」</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="card-icon">&#x1F30D;</span>
+      <h3>地理區位</h3>
+      <p>位於高雄市左營區，潭面約 42 公頃，水源引自高屏溪經曹公圳注入。南接龜山、北靠半屏山，東臨翠華路、西為左營舊城。潭區兼具灌溉（原 480 公頃農田）、防洪、觀光三功能。周邊有鳳山縣舊城古蹟群與左營眷村文化聚落。</p>
+      <p style="margin-top:0.8rem;"><strong>地址：</strong>高雄市左營區蓮潭路（龍虎塔位於潭西岸）</p>
+    </div>
+  </div>
+  <h3 class="sub-header">交通方式</h3>
+  <div class="transport-grid">
+    <div class="tp-item"><div class="mode">高鐵 / 台鐵</div><p>左營站／新左營站下車，步行 10–15 分；計程車 5 分</p></div>
+    <div class="tp-item"><div class="mode">捷運</div><p>紅線 R16 左營站步行 15 分；R15 生態園區站 2 號出口轉紅 51</p></div>
+    <div class="tp-item"><div class="mode">公車</div><p>301、紅 35、紅 51A/B、紅 52，蓮池潭站（勝利路／翠華路）下車</p></div>
+    <div class="tp-item"><div class="mode">YouBike</div><p>龍虎塔前、舊城國小、物產館、兒童公園停車場等多站</p></div>
+    <div class="tp-item"><div class="mode">開車</div><p>蓮池潭風景區停車場、海光停車場</p></div>
+  </div>
+</div>
+</section>
+<!-- 85 SKY TOWER -->
+<section id="85s">
+<div class="section-inner">
+  <div class="spot-intro">
+    <div class="spot-visual"><img src="P003.png" alt="高雄85大樓"><div class="label">85 Sky Tower</div></div>
+    <div class="spot-text">
+      <h2>高雄 85 大樓</h2>
+      <div class="en">85 Sky Tower — Tuntex &amp; Chien-Tai Tower</div>
+      <p>位於苓雅區三多商圈，樓高 347.5 公尺（含尖塔 378 公尺），地上 85 層、地下 5 層，1997 年完工時為亞洲第三高樓。由建築師李祖原設計，外觀如「高」字，為南台灣最高摩天大樓。92 部電梯手扶梯，最快電梯 45 秒可達 77 樓，曾是世界第三高速電梯。</p>
+      <p style="margin-top:1rem;"><a href="85.html" style="display:inline-block; padding:0.4rem 1.6rem; border:1px solid rgba(252,163,17,0.3); border-radius:30px; color:#fca311; text-decoration:none; font-size:0.85rem; letter-spacing:0.05em; transition:all 0.25s;" onmouseover="this.style.background='rgba(252,163,17,0.1)';" onmouseout="this.style.background='transparent';">完整介紹 →</a></p>
+    </div>
+  </div>
+  <div class="card-grid">
+    <div class="card">
+      <span class="card-icon">&#x1F4DC;</span>
+      <h3>歷史沿革</h3>
+      <div class="timeline">
+        <div class="tl-item"><span class="year">1988</span><p>東帝士集團東雲建設與建台水泥簽約，計劃興建複合式超高層大樓 TC Tower</p></div>
+        <div class="tl-item"><span class="year">1989–1997</span><p>歷經 8 年興建，克服地基流失等困難，終告完工</p></div>
+        <div class="tl-item"><span class="year">1997</span><p>落成時為亞洲第三高樓，台灣第一高樓（至 2004 年台北 101 落成）</p></div>
+        <div class="tl-item"><span class="year">1999</span><p>飯店試營運，設有百貨、主題樂園、晶華酒店</p></div>
+        <div class="tl-item"><span class="year">2001–2019</span><p>歷經大丸撤出、陳由豪掏空案、多次易主：青雲金典→君鴻國際酒店→法拍</p></div>
+        <div class="tl-item"><span class="year">2019–迄今</span><p>海霸王集團以 54.4 億元標下，計劃打造五星級地標酒店，整修中</p></div>
+      </div>
+    </div>
+    <div class="card">
+      <span class="card-icon">&#x1F3DB;&#xFE0F;</span>
+      <h3>人文特色</h3>
+      <ul>
+        <li>台灣第一棟引進抗風阻尼器的摩天大樓，結構安全指標</li>
+        <li>74–75 樓觀景台可 360 度俯瞰高雄港、壽山、旗津、屏東平原</li>
+        <li>「觀景廁所」擁有大片落地窗，成為特殊打卡亮點</li>
+        <li>80–85 樓金字塔冠為三層樓高建築造型，夜間打燈後璀璨奪目</li>
+        <li>見證高雄從重工業城市轉型為港灣經貿城市的歷史縮影</li>
+        <li>全台最高「高」字建築，與台北 101 分別矗立南北兩端</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="card-icon">&#x1F30D;</span>
+      <h3>地理區位</h3>
+      <p>位於苓雅區自強三路，東側自強路、南側新光路、北側三多路、西側成功路。緊鄰高雄港、新光碼頭、高雄展覽館、市圖總館。步行 5 分鐘可達三多商圈捷運站，輕軌高雄展覽館站亦在咫尺。亞洲新灣區核心地帶，為高雄經貿門戶樞紐。</p>
+      <p style="margin-top:0.8rem;"><strong>地址：</strong>高雄市苓雅區自強三路 1 號</p>
+    </div>
+  </div>
+  <h3 class="sub-header">交通方式</h3>
+  <div class="transport-grid">
+    <div class="tp-item"><div class="mode">捷運</div><p>紅線 R8 三多商圈站 2 號出口，沿新光路步行約 8 分鐘</p></div>
+    <div class="tp-item"><div class="mode">輕軌</div><p>C8 高雄展覽館站（新光碼頭），步行約 3 分鐘</p></div>
+    <div class="tp-item"><div class="mode">公車</div><p>78、83、100 至建台百貨站；70、14 至三多四路口；12、301 至三多圓環</p></div>
+    <div class="tp-item"><div class="mode">YouBike</div><p>新光自強路口、新光成功路口、市圖總館等站點</p></div>
+    <div class="tp-item"><div class="mode">開車</div><p>國道 1 號高雄交流道（中正出口）→三多路→自強三路</p></div>
+  </div>
+</div>
+</section>
+<!-- ROUTE OVERVIEW -->
+<section id="route" style="background: rgba(255,255,255,0.015);">
+<div class="section-inner">
+  <h2 style="font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; margin-bottom: 0.3rem; letter-spacing: 0.04em;">三點一線</h2>
+  <p style="font-size: 1rem; color: rgba(255,255,255,0.4); margin-bottom: 2rem; letter-spacing: 0.15em;">串聯三大經典地標的交通動線</p>
+
+  <div class="card-grid" style="grid-template-columns: 1fr;">
+    <div class="card">
+      <h3>建議一日遊動線</h3>
+      <ul>
+        <li><strong>上午 09:00 – 蓮池潭龍虎塔</strong> — 高鐵左營站步行 / 騎 YouBike 約 10 分鐘，走訪龍虎塔、春秋閣、孔庙，登塔俯瞰潭景</li>
+        <li><strong>中午 12:00 – 午餐推薦</strong> — 左營眷村美食（餃子、酸菜白肉鍋、汾陽餛飩）或蓮池潭畔泮咖啡輕食</li>
+        <li><strong>下午 14:00 – 高雄流行音樂中心</strong> — 由左營搭捷運紅線至 R8 三多商圈站，轉輕軌至真愛碼頭站；或搭紅線至 R9 中央公園站轉 100 號公車</li>
+        <li><strong>傍晚 17:00 – 85 大樓 &amp; 亞洲新灣區</strong> — 從高流步行或輕軌至 C8 展覽館站，逛高雄市圖總館、新光碼頭，登 85 觀景台賞夕陽</li>
+        <li><strong>晚間 19:00 – 三多商圈 / 自強夜市</strong> — 三多路商圈購物、自強夜市品嚐在地小吃，為一日畫下句點</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; margin: 2rem 0; text-align: center;">
+    <div style="padding: 0.8rem; background: rgba(252,163,17,0.1); border-radius: 8px;">
+      <div style="font-weight: 700; color: #fca311;">蓮池潭龍虎塔</div>
+      <div style="font-size: 0.8rem; color: rgba(255,255,255,0.4);">左營區</div>
+      <div style="font-size: 1.2rem; margin: 0.3rem 0;">⬇</div>
+      <div style="font-size: 0.8rem; color: rgba(255,255,255,0.5);">捷運紅線 15 分</div>
+    </div>
+    <div style="padding: 0.8rem; background: rgba(252,163,17,0.1); border-radius: 8px;">
+      <div style="font-weight: 700; color: #fca311;">高雄流行音樂中心</div>
+      <div style="font-size: 0.8rem; color: rgba(255,255,255,0.4);">鹽埕區／苓雅區</div>
+      <div style="font-size: 1.2rem; margin: 0.3rem 0;">⬇</div>
+      <div style="font-size: 0.8rem; color: rgba(255,255,255,0.5);">輕軌 5 分</div>
+    </div>
+    <div style="padding: 0.8rem; background: rgba(252,163,17,0.1); border-radius: 8px;">
+      <div style="font-weight: 700; color: #fca311;">85 大樓</div>
+      <div style="font-size: 0.8rem; color: rgba(255,255,255,0.4);">苓雅區</div>
+      <div style="font-size: 0.8rem; color: rgba(255,255,255,0.5);">三多商圈</div>
+    </div>
+  </div>
+
+  <div class="card-grid" style="grid-template-columns: 1fr;">
+    <div class="card">
+      <h3>跨景點交通速查</h3>
+      <div style="overflow-x: auto;">
+        <table style="width:100%; border-collapse: collapse; font-size: 0.9rem;">
+          <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+            <th style="text-align:left; padding:0.6rem 0.5rem; color:#fca311;">路線</th>
+            <th style="text-align:left; padding:0.6rem 0.5rem; color:#fca311;">方式</th>
+            <th style="text-align:left; padding:0.6rem 0.5rem; color:#fca311;">時間</th>
+            <th style="text-align:left; padding:0.6rem 0.5rem; color:#fca311;">備註</th>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+            <td style="padding:0.6rem 0.5rem;">蓮池潭 → 高流</td>
+            <td style="padding:0.6rem 0.5rem;">捷運紅線 R16→R8 轉輕軌</td>
+            <td style="padding:0.6rem 0.5rem;">約 25 分</td>
+            <td style="padding:0.6rem 0.5rem;">R8 三多商圈站 1 號出口轉紅 18 亦可</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+            <td style="padding:0.6rem 0.5rem;">高流 → 85 大樓</td>
+            <td style="padding:0.6rem 0.5rem;">輕軌 C11→C8 + 步行</td>
+            <td style="padding:0.6rem 0.5rem;">約 12 分</td>
+            <td style="padding:0.6rem 0.5rem;">或沿海邊路步行 15 分</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem 0.5rem;">蓮池潭 → 85 大樓</td>
+            <td style="padding:0.6rem 0.5rem;">捷運紅線直達 R16→R8</td>
+            <td style="padding:0.6rem 0.5rem;">約 18 分</td>
+            <td style="padding:0.6rem 0.5rem;">無需轉乘，最便捷</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- REFLECTION -->
+<section id="reflection" style="background: rgba(255,255,255,0.015);">
+<div class="section-inner">
+  <h2 style="font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; margin-bottom: 0.3rem; letter-spacing: 0.04em;">課堂心得</h2>
+  <p style="font-size: 1rem; color: rgba(255,255,255,0.4); margin-bottom: 2rem; letter-spacing: 0.15em;">「生成式 AI 與多媒體製作」</p>
+
+  <div class="card-grid" style="grid-template-columns: 1fr;">
+    <div class="card">
+      <h3>一、核心收穫：思維的轉變</h3>
+      <p>這門課顛覆了我對多媒體創作的認知。過去製作影音需要耗費大量時間在軟體操作上，但透過這門課，我學會了如何利用提示詞（Prompts）與 AI 協同創作。這讓我意識到，未來的核心競爭力不再是技術熟練度，而是「創意企劃」與「問題解決」的能力。</p>
+    </div>
+    <div class="card">
+      <h3>二、工具體驗與實務應用</h3>
+      <p>在課堂實作中，AI 在視覺圖像生成與動態影片打樣上展現了驚人的效率。只需幾秒鐘就能產出高質感的概念圖，大大縮短了初期分鏡（Storyboard）的溝通成本。雖然部分技術在細節上仍有優化空間，但這套「人機協同」的工作流已展現出強大的實用性。</p>
+    </div>
+    <div class="card">
+      <h3>三、反思與未來展望</h3>
+      <p>AI 雖然降低了創作門檻，但作品的靈魂依然取決於創作者的美感把關與情感堆疊。這門課讓我解脫了繁瑣的數位勞動，能更專注於「講好一個故事」。未來我將持續探索 AI 工具，將其轉化為提升作品質感的強大副駕駛。</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>港都經典 — 高雄流行音樂中心 · 蓮池潭龍虎塔 · 85 大樓</p>
+  <p style="margin-top: 0.3rem;">資料來源：高雄市政府、高雄旅遊網、維基百科 | 僅供參考，資訊以官方公告為準</p>
+</footer>
+
+</body>
+</html>

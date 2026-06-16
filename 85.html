@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高雄 85 大樓 — 港都經典</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+    background: #0b0e14;
+    color: #e8edf5;
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+  .hero {
+    position: relative;
+    height: 70vh;
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(135deg, #0f172a 0%, #1a2332 50%, #0d1b2a 100%);
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 30%, rgba(247,127,0,0.18) 0%, transparent 50%), radial-gradient(ellipse at 30% 70%, rgba(114,9,183,0.1) 0%, transparent 50%);
+    z-index: 1;
+  }
+  .hero-content { position: relative; z-index: 2; padding: 2rem; }
+  .hero h1 {
+    font-size: clamp(2.4rem, 7vw, 5rem);
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    background: linear-gradient(135deg, #fca311, #ffb703, #fca311);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.3rem;
+  }
+  .hero .sub {
+    font-size: clamp(0.9rem, 2vw, 1.3rem);
+    font-weight: 300;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.3em;
+  }
+  .hero .back-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.5rem 1.8rem;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 30px;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    transition: all 0.25s;
+  }
+  .hero .back-link:hover { border-color: #fca311; color: #fca311; }
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(11,14,20,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06); padding: 0 1rem;
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto; display: flex; gap: 0;
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav a {
+    flex: 1; min-width: 100px; padding: 0.9rem 0.5rem; text-align: center;
+    text-decoration: none; color: rgba(255,255,255,0.55); font-size: 0.9rem;
+    font-weight: 500; letter-spacing: 0.06em; border-bottom: 2px solid transparent;
+    transition: all 0.25s; white-space: nowrap;
+  }
+  .nav a:hover, .nav a.active { color: #fca311; border-bottom-color: #fca311; }
+  section { padding: 4rem 1rem; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .section-title {
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700;
+    margin-bottom: 0.3rem; letter-spacing: 0.04em;
+  }
+  .section-sub {
+    font-size: 1rem; color: rgba(255,255,255,0.4);
+    margin-bottom: 2.5rem; letter-spacing: 0.15em;
+  }
+  .feature-img {
+    width: 100%; border-radius: 16px; margin-bottom: 2.5rem;
+    display: block;
+  }
+  .intro-text {
+    max-width: 800px; margin: 0 auto 2.5rem;
+    text-align: center; font-weight: 300; color: rgba(255,255,255,0.75);
+    font-size: 1.05rem;
+  }
+  .card-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;
+  }
+  .card {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px; padding: 1.8rem 1.8rem 2.2rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+  .card-icon { font-size: 2rem; margin-bottom: 0.6rem; display: block; }
+  .card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.8rem; color: #fca311; }
+  .card p, .card li { font-size: 0.95rem; color: rgba(255,255,255,0.78); font-weight: 300; }
+  .card ul { list-style: none; padding: 0; }
+  .card li { padding: 0.3rem 0; padding-left: 1.2rem; position: relative; }
+  .card li::before { content: '▸'; position: absolute; left: 0; color: #fca311; }
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 6px; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(to bottom, #fca311, transparent);
+  }
+  .tl-item { position: relative; margin-bottom: 1.4rem; }
+  .tl-item::before {
+    content: ''; position: absolute; left: -2rem; top: 0.5rem;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: #fca311; border: 2px solid #0b0e14;
+  }
+  .tl-item .year { font-weight: 700; color: #fca311; font-size: 0.95rem; }
+  .tl-item p { color: rgba(255,255,255,0.7); font-weight: 300; font-size: 0.9rem; }
+  .transport-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem;
+  }
+  .tp-item {
+    background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px; padding: 1.2rem 1.4rem;
+  }
+  .tp-item .mode { font-weight: 700; font-size: 1rem; margin-bottom: 0.3rem; color: #ffb703; }
+  .tp-item p { font-size: 0.88rem; color: rgba(255,255,255,0.65); font-weight: 300; }
+  .info-block {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.2rem;
+    margin-top: 2rem;
+  }
+  .info-item {
+    background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px; padding: 1.2rem 1.4rem; text-align: center;
+  }
+  .info-item .label { font-size: 0.8rem; color: rgba(255,255,255,0.35); letter-spacing: 0.1em; }
+  .info-item .value { font-size: 1.1rem; font-weight: 500; color: #fca311; margin-top: 0.2rem; }
+  .spec-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem;
+    margin: 2rem 0;
+  }
+  .spec-item {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px; padding: 1rem; text-align: center;
+  }
+  .spec-item .num {
+    font-size: 1.6rem; font-weight: 900; color: #fca311; line-height: 1.2;
+  }
+  .spec-item .desc { font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-top: 0.2rem; }
+  @media (max-width: 768px) {
+    .card-grid { grid-template-columns: 1fr; }
+    .nav a { font-size: 0.78rem; min-width: 80px; }
+    section { padding: 3rem 1rem; }
+    .hero { height: 60vh; min-height: 320px; }
+  }
+  footer {
+    text-align: center; padding: 3rem 1rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    color: rgba(255,255,255,0.25); font-size: 0.85rem; font-weight: 300;
+  }
+  footer a { color: rgba(255,255,255,0.35); text-decoration: none; }
+  footer a:hover { color: #fca311; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-content">
+    <h1>高雄 85 大樓</h1>
+    <p class="sub">85 Sky Tower — Tuntex &amp; Chien-Tai Tower</p>
+    <p style="margin-top:0.8rem; color:rgba(255,255,255,0.5); font-weight:300; font-size:0.95rem;">南台灣最高摩天大樓 · 亞洲新灣區核心</p>
+    <a href="index.html" class="back-link">← 返回首頁</a>
+  </div>
+</header>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#overview">概覽</a>
+    <a href="#history">歷史沿革</a>
+    <a href="#features">建築特色</a>
+    <a href="#traffic">交通方式</a>
+    <a href="kpmc.html">高雄流行音樂中心</a>
+    <a href="lotus.html">蓮池潭龍虎塔</a>
+    <a href="index.html">回首頁</a>
+  </div>
+</nav>
+
+<section id="overview">
+<div class="section-inner">
+  <h2 class="section-title">概覽</h2>
+  <p class="section-sub">About 85 Sky Tower</p>
+  <img src="P003.png" alt="高雄85大樓" class="feature-img">
+  <p class="intro-text">位於苓雅區三多商圈，樓高 347.5 公尺（含尖塔 378 公尺），地上 85 層、地下 5 層，1997 年完工時為亞洲第三高樓。由建築師李祖原設計，外觀如「高」字，為南台灣最高摩天大樓。92 部電梯手扶梯，最快電梯 45 秒可達 77 樓，曾是世界第三高速電梯。</p>
+  <div class="info-block">
+    <div class="info-item"><div class="label">樓層</div><div class="value">地上 85 層</div></div>
+    <div class="info-item"><div class="label">高度</div><div class="value">347.5 公尺</div></div>
+    <div class="info-item"><div class="label">完工年份</div><div class="value">1997</div></div>
+    <div class="info-item"><div class="label">地址</div><div class="value">苓雅區自強三路 1 號</div></div>
+  </div>
+
+  <h3 style="font-size:1.3rem; font-weight:700; margin:2.5rem 0 1rem; color:#ffb703; letter-spacing:0.04em;">建築規格</h3>
+  <div class="spec-grid">
+    <div class="spec-item"><div class="num">347.5m</div><div class="desc">建築高度</div></div>
+    <div class="spec-item"><div class="num">378m</div><div class="desc">含尖塔高度</div></div>
+    <div class="spec-item"><div class="num">85</div><div class="desc">地上樓層</div></div>
+    <div class="spec-item"><div class="num">5</div><div class="desc">地下樓層</div></div>
+    <div class="spec-item"><div class="num">92</div><div class="desc">電梯／手扶梯</div></div>
+    <div class="spec-item"><div class="num">45s</div><div class="desc">最快電梯至 77F</div></div>
+  </div>
+</div>
+</section>
+
+<section id="history" style="background: rgba(255,255,255,0.015);">
+<div class="section-inner">
+  <h2 class="section-title">歷史沿革</h2>
+  <p class="section-sub">從亞洲第三高樓到地標重生</p>
+  <div class="card-grid">
+    <div class="card">
+      <span class="card-icon">&#x1F4DC;</span>
+      <h3>發展歷程</h3>
+      <div class="timeline">
+        <div class="tl-item"><span class="year">1988</span><p>東帝士集團東雲建設與建台水泥簽約，計劃興建複合式超高層大樓 TC Tower</p></div>
+        <div class="tl-item"><span class="year">1989–1997</span><p>歷經 8 年興建，克服地基流失等困難，終告完工</p></div>
+        <div class="tl-item"><span class="year">1997</span><p>落成時為亞洲第三高樓，台灣第一高樓（至 2004 年台北 101 落成）</p></div>
+        <div class="tl-item"><span class="year">1999</span><p>飯店試營運，設有百貨、主題樂園、晶華酒店</p></div>
+        <div class="tl-item"><span class="year">2001–2019</span><p>歷經大丸撤出、陳由豪掏空案、多次易主：青雲金典→君鴻國際酒店→法拍</p></div>
+        <div class="tl-item"><span class="year">2019–迄今</span><p>海霸王集團以 54.4 億元標下，計劃打造五星級地標酒店，整修中</p></div>
+      </div>
+    </div>
+    <div class="card">
+      <span class="card-icon">&#x1F3D7;&#xFE0F;</span>
+      <h3>歷程關鍵事件</h3>
+      <ul>
+        <li>東帝士集團陳由豪主導開發，總投資逾 300 億元</li>
+        <li>曾為台灣最高樓（1997–2004），後被台北 101 超越</li>
+        <li>2001 年大丸百貨撤出，商業機能逐步衰退</li>
+        <li>2019 年君鴻酒店法拍，海霸王 54.4 億得標</li>
+        <li>2020 年更名「高雄 85 大樓」，啟動全面整修</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="features">
+<div class="section-inner">
+  <h2 class="section-title">建築特色</h2>
+  <p class="section-sub">設計 · 結構 · 景觀</p>
+  <div class="card-grid">
+    <div class="card">
+      <span class="card-icon">&#x1F3F0;</span>
+      <h3>「高」字造型</h3>
+      <p>建築師李祖原以中文「高」字為設計靈感，主體為兩幢並立的塔樓，中央開口形成「高」字輪廓。屋頂金字塔冠以三層樓高的玻璃帷幕構成，夜間 LED 打燈後璀璨奪目。</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">&#x2699;&#xFE0F;</span>
+      <h3>抗風阻尼系統</h3>
+      <p>台灣第一棟引進抗風阻尼器的摩天大樓，有效降低強風下的搖晃幅度。結構安全設計經得起颱風與地震考驗，為後續超高層建築樹立標竿。</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">&#x1F4CD;</span>
+      <h3>高速電梯</h3>
+      <p>配置 92 部電梯與手扶梯，其中 2 部高速直達電梯 45 秒即達 77 樓，速度曾為世界第三。搭乘時可感受耳壓變化，是登高體驗的一大亮點。</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">&#x1F30C;</span>
+      <h3>360° 觀景台</h3>
+      <p>74–75 樓設有觀景台，可 360 度俯瞰高雄港、壽山、旗津、屏東平原。其中「觀景廁所」擁有大片落地窗，成為特殊打卡亮點。</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">&#x1F3ED;</span>
+      <h3>五星級酒店規劃</h3>
+      <p>海霸王集團預計將 33–70 樓打造成五星級地標酒店，結合宴會廳、景觀餐廳、高空酒吧，重塑 85 大樓為國際觀光新地標。</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">&#x1F30D;</span>
+      <h3>亞洲新灣區核心</h3>
+      <p>位於亞洲新灣區樞紐地段，緊鄰高雄港、新光碼頭、高雄展覽館、市圖總館。見證高雄從重工業城市轉型為港灣經貿城市的歷史進程。</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="traffic" style="background: rgba(255,255,255,0.015);">
+<div class="section-inner">
+  <h2 class="section-title">交通方式</h2>
+  <p class="section-sub">如何抵達 85 大樓</p>
+  <div class="transport-grid">
+    <div class="tp-item"><div class="mode">捷運</div><p>紅線 R8 三多商圈站 2 號出口，沿新光路步行約 8 分鐘</p></div>
+    <div class="tp-item"><div class="mode">輕軌</div><p>C8 高雄展覽館站（新光碼頭），步行約 3 分鐘</p></div>
+    <div class="tp-item"><div class="mode">公車</div><p>78、83、100 至建台百貨站；70、14 至三多四路口；12、301 至三多圓環</p></div>
+    <div class="tp-item"><div class="mode">YouBike</div><p>新光自強路口、新光成功路口、市圖總館等站點</p></div>
+    <div class="tp-item"><div class="mode">開車</div><p>國道 1 號高雄交流道（中正出口）→三多路→自強三路</p></div>
+  </div>
+  <div style="margin-top: 2rem; text-align: center;">
+    <a href="index.html" style="display:inline-block; padding:0.6rem 2rem; border:1px solid rgba(255,255,255,0.12); border-radius:30px; color:rgba(255,255,255,0.5); text-decoration:none; font-size:0.9rem; letter-spacing:0.1em; transition:all 0.25s;" onmouseover="this.style.borderColor='#fca311'; this.style.color='#fca311';" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'; this.style.color='rgba(255,255,255,0.5';">← 返回首頁</a>
+  </div>
+</div>
+</section>
+
+<footer>
+  <p>高雄 85 大樓 — 港都經典</p>
+  <p style="margin-top: 0.3rem;"><a href="index.html">回首頁</a> · <a href="kpmc.html">高雄流行音樂中心</a> · <a href="lotus.html">蓮池潭龍虎塔</a></p>
+  <p style="margin-top: 0.3rem; font-size:0.8rem;">資料來源：高雄市政府、高雄旅遊網、維基百科 | 僅供參考</p>
+</footer>
+
+</body>
+</html>

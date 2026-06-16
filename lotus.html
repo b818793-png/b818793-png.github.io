@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>蓮池潭龍虎塔 — 港都經典</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+    background: #0b0e14;
+    color: #e8edf5;
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+  .hero {
+    position: relative;
+    height: 70vh;
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(135deg, #0f172a 0%, #1a2332 50%, #0d1b2a 100%);
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 40% 50%, rgba(0,180,216,0.2) 0%, transparent 50%), radial-gradient(ellipse at 60% 40%, rgba(247,127,0,0.15) 0%, transparent 50%);
+    z-index: 1;
+  }
+  .hero-content { position: relative; z-index: 2; padding: 2rem; }
+  .hero h1 {
+    font-size: clamp(2.4rem, 7vw, 5rem);
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    background: linear-gradient(135deg, #fca311, #ffb703, #fca311);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.3rem;
+  }
+  .hero .sub {
+    font-size: clamp(0.9rem, 2vw, 1.3rem);
+    font-weight: 300;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.3em;
+  }
+  .hero .back-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.5rem 1.8rem;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 30px;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    transition: all 0.25s;
+  }
+  .hero .back-link:hover { border-color: #fca311; color: #fca311; }
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(11,14,20,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06); padding: 0 1rem;
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto; display: flex; gap: 0;
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav a {
+    flex: 1; min-width: 100px; padding: 0.9rem 0.5rem; text-align: center;
+    text-decoration: none; color: rgba(255,255,255,0.55); font-size: 0.9rem;
+    font-weight: 500; letter-spacing: 0.06em; border-bottom: 2px solid transparent;
+    transition: all 0.25s; white-space: nowrap;
+  }
+  .nav a:hover, .nav a.active { color: #fca311; border-bottom-color: #fca311; }
+  section { padding: 4rem 1rem; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .section-title {
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700;
+    margin-bottom: 0.3rem; letter-spacing: 0.04em;
+  }
+  .section-sub {
+    font-size: 1rem; color: rgba(255,255,255,0.4);
+    margin-bottom: 2.5rem; letter-spacing: 0.15em;
+  }
+  .feature-img {
+    width: 100%; border-radius: 16px; margin-bottom: 2.5rem;
+    display: block;
+  }
+  .intro-text {
+    max-width: 800px; margin: 0 auto 2.5rem;
+    text-align: center; font-weight: 300; color: rgba(255,255,255,0.75);
+    font-size: 1.05rem;
+  }
+  .card-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;
+  }
+  .card {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px; padding: 1.8rem 1.8rem 2.2rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+  .card-icon { font-size: 2rem; margin-bottom: 0.6rem; display: block; }
+  .card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.8rem; color: #fca311; }
+  .card p, .card li { font-size: 0.95rem; color: rgba(255,255,255,0.78); font-weight: 300; }
+  .card ul { list-style: none; padding: 0; }
+  .card li { padding: 0.3rem 0; padding-left: 1.2rem; position: relative; }
+  .card li::before { content: '▸'; position: absolute; left: 0; color: #fca311; }
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 6px; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(to bottom, #fca311, transparent);
+  }
+  .tl-item { position: relative; margin-bottom: 1.4rem; }
+  .tl-item::before {
+    content: ''; position: absolute; left: -2rem; top: 0.5rem;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: #fca311; border: 2px solid #0b0e14;
+  }
+  .tl-item .year { font-weight: 700; color: #fca311; font-size: 0.95rem; }
+  .tl-item p { color: rgba(255,255,255,0.7); font-weight: 300; font-size: 0.9rem; }
+  .transport-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem;
+  }
+  .tp-item {
+    background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px; padding: 1.2rem 1.4rem;
+  }
+  .tp-item .mode { font-weight: 700; font-size: 1rem; margin-bottom: 0.3rem; color: #ffb703; }
+  .tp-item p { font-size: 0.88rem; color: rgba(255,255,255,0.65); font-weight: 300; }
+  .info-block {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.2rem;
+    margin-top: 2rem;
+  }
+  .info-item {
+    background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px; padding: 1.2rem 1.4rem; text-align: center;
+  }
+  .info-item .label { font-size: 0.8rem; color: rgba(255,255,255,0.35); letter-spacing: 0.1em; }
+  .info-item .value { font-size: 1.1rem; font-weight: 500; color: #fca311; margin-top: 0.2rem; }
+  .shrine-list {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.8rem;
+    margin: 1rem 0;
+  }
+  .shrine-item {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 8px; padding: 0.6rem 1rem; text-align: center;
+    font-size: 0.9rem; color: rgba(255,255,255,0.7);
+  }
+  @media (max-width: 768px) {
+    .card-grid { grid-template-columns: 1fr; }
+    .nav a { font-size: 0.78rem; min-width: 80px; }
+    section { padding: 3rem 1rem; }
+    .hero { height: 60vh; min-height: 320px; }
+  }
+  footer {
+    text-align: center; padding: 3rem 1rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    color: rgba(255,255,255,0.25); font-size: 0.85rem; font-weight: 300;
+  }
+  footer a { color: rgba(255,255,255,0.35); text-decoration: none; }
+  footer a:hover { color: #fca311; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-content">
+    <h1>蓮池潭 · 龍虎塔</h1>
+    <p class="sub">Lotus Pond — Dragon &amp; Tiger Pagodas</p>
+    <p style="margin-top:0.8rem; color:rgba(255,255,255,0.5); font-weight:300; font-size:0.95rem;">龍口進 · 虎口出 · 消災解厄</p>
+    <a href="index.html" class="back-link">← 返回首頁</a>
+  </div>
+</header>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#overview">概覽</a>
+    <a href="#history">歷史沿革</a>
+    <a href="#features">人文特色</a>
+    <a href="#traffic">交通方式</a>
+    <a href="kpmc.html">高雄流行音樂中心</a>
+    <a href="85.html">85 大樓</a>
+    <a href="index.html">回首頁</a>
+  </div>
+</nav>
+
+<section id="overview">
+<div class="section-inner">
+  <h2 class="section-title">概覽</h2>
+  <p class="section-sub">About Lotus Pond</p>
+  <img src="P002.png" alt="蓮池潭龍虎塔" class="feature-img">
+  <p class="intro-text">位於左營區，南鄰龜山、北倚半屏山，潭面約 42 公頃。清領時期即為「鳳山八景」之一——泮水荷香。1976 年左營慈濟宮奉保生大帝旨意興建龍虎雙塔，七層樓高、以九曲橋凌波相連，「龍口進、虎口出」象徵消災解厄、趨吉避凶。CNN 2014 年列為「愛上高雄十大理由」，國際巨星訪高必訪景點。</p>
+  <div class="info-block">
+    <div class="info-item"><div class="label">潭面面積</div><div class="value">42 公頃</div></div>
+    <div class="info-item"><div class="label">龍虎塔完工</div><div class="value">1976 年</div></div>
+    <div class="info-item"><div class="label">塔高</div><div class="value">七層樓</div></div>
+    <div class="info-item"><div class="label">地址</div><div class="value">左營區蓮潭路</div></div>
+  </div>
+</div>
+</section>
+
+<section id="history" style="background: rgba(255,255,255,0.015);">
+<div class="section-inner">
+  <h2 class="section-title">歷史沿革</h2>
+  <p class="section-sub">從泮水荷香到國際地標</p>
+  <div class="card-grid">
+    <div class="card">
+      <span class="card-icon">&#x1F4DC;</span>
+      <h3>發展歷程</h3>
+      <div class="timeline">
+        <div class="tl-item"><span class="year">1686</span><p>鳳山知縣楊芳聲建文廟，以蓮池潭為泮池、遍植荷花，「泮水荷香」名列鳳山八景</p></div>
+        <div class="tl-item"><span class="year">1705</span><p>知縣宋永清濬修；1842 年曹瑾擴建開圳引水灌溉千餘甲農田</p></div>
+        <div class="tl-item"><span class="year">1953</span><p>春秋閣興建，紀念關公與孔子作春秋，潭畔最早的大型人工景觀</p></div>
+        <div class="tl-item"><span class="year">1974</span><p>左營慈濟宮保生大帝降駕指示將有災難，信徒發願興建龍虎塔鎮災</p></div>
+        <div class="tl-item"><span class="year">1976</span><p>龍虎雙塔完工；隔年賽洛瑪颱風重創南台灣，雙塔成為避難所</p></div>
+        <div class="tl-item"><span class="year">2023–2024</span><p>全面修復完工，強化夜間燈光、增設多國語音導覽牆</p></div>
+      </div>
+    </div>
+    <div class="card">
+      <span class="card-icon">&#x1F3DB;&#xFE0F;</span>
+      <h3>歷史典故</h3>
+      <ul>
+        <li>「泮水荷香」為清代鳳山八景之一，文廟泮池遍植荷花</li>
+        <li>曹公圳引高屏溪水灌溉，蓮池潭為重要調節池</li>
+        <li>春秋閣供奉關聖帝君，騎龍觀音像流傳顯靈傳說</li>
+        <li>保生大帝降旨建塔鎮災，隔年賽洛瑪颱風應驗預言</li>
+        <li>潭畔 20 餘座寺廟，密度全台之最</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="features">
+<div class="section-inner">
+  <h2 class="section-title">人文特色</h2>
+  <p class="section-sub">信仰 · 建築 · 節慶</p>
+  <div class="card-grid">
+    <div class="card">
+      <span class="card-icon">&#x1F409;</span>
+      <h3>龍虎塔</h3>
+      <p>龍塔繪二十四孝圖、十殿閻王圖，虎塔繪七十二賢士與三十六官將。遊客遵循「入龍喉、出虎口」順序，象徵將晦氣留在龍腹、由虎口吐出，獲得新生。</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">&#x26EA;</span>
+      <h3>春秋閣</h3>
+      <p>建於 1953 年，為紀念關公與孔子作春秋而命名。潭畔騎龍觀音聖像高約 20 公尺，流傳觀音菩薩曾顯靈救助漁民，為地方重要信仰中心。</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">&#x1F3F0;</span>
+      <h3>孔廟</h3>
+      <p>1976 年重建，建築仿北宋風格，占地 4.5 公頃。每年教師節舉行釋奠典禮，為全台規模最大的孔廟之一。</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">&#x1F386;</span>
+      <h3>左營萬年季</h3>
+      <p>每年十月舉行，為高雄最大宗教文化節慶。廟宇繞境、火獅祈福、傳統陣頭表演，吸引數十萬人參與。</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">&#x1F3CA;</span>
+      <h3>蓮潭滑水主題樂園</h3>
+      <p>全台首座國際標準纜繩滑水場，設有專業滑水賽道與教學課程。結合水域活動與觀光，為蓮池潭注入現代活力。</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">&#x1F30D;</span>
+      <h3>環潭步道</h3>
+      <p>環潭步道全長約 3.5 公里，沿途設置生態島、親水座階、觀景平台。獲金質獎環境營造工程肯定，為市民晨跑、散步的首選。</p>
+    </div>
+  </div>
+
+  <h3 style="font-size:1.3rem; font-weight:700; margin:2.5rem 0 1rem; color:#ffb703; letter-spacing:0.04em;">周邊寺廟一覽</h3>
+  <div class="shrine-list">
+    <div class="shrine-item">慈濟宮</div>
+    <div class="shrine-item">啟明堂</div>
+    <div class="shrine-item">元帝廟</div>
+    <div class="shrine-item">城隍廟</div>
+    <div class="shrine-item">天府宮</div>
+    <div class="shrine-item">清水宮</div>
+    <div class="shrine-item">聖母廟</div>
+    <div class="shrine-item">福德祠</div>
+  </div>
+</div>
+</section>
+
+<section id="traffic" style="background: rgba(255,255,255,0.015);">
+<div class="section-inner">
+  <h2 class="section-title">交通方式</h2>
+  <p class="section-sub">如何抵達蓮池潭龍虎塔</p>
+  <div class="transport-grid">
+    <div class="tp-item"><div class="mode">高鐵 / 台鐵</div><p>左營站／新左營站下車，步行 10–15 分；計程車 5 分</p></div>
+    <div class="tp-item"><div class="mode">捷運</div><p>紅線 R16 左營站步行 15 分；R15 生態園區站 2 號出口轉紅 51</p></div>
+    <div class="tp-item"><div class="mode">公車</div><p>301、紅 35、紅 51A/B、紅 52，蓮池潭站（勝利路／翠華路）下車</p></div>
+    <div class="tp-item"><div class="mode">YouBike</div><p>龍虎塔前、舊城國小、物產館、兒童公園停車場等多站</p></div>
+    <div class="tp-item"><div class="mode">開車</div><p>蓮池潭風景區停車場、海光停車場</p></div>
+  </div>
+  <div style="margin-top: 2rem; text-align: center;">
+    <a href="index.html" style="display:inline-block; padding:0.6rem 2rem; border:1px solid rgba(255,255,255,0.12); border-radius:30px; color:rgba(255,255,255,0.5); text-decoration:none; font-size:0.9rem; letter-spacing:0.1em; transition:all 0.25s;" onmouseover="this.style.borderColor='#fca311'; this.style.color='#fca311';" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'; this.style.color='rgba(255,255,255,0.5';">← 返回首頁</a>
+  </div>
+</div>
+</section>
+
+<footer>
+  <p>蓮池潭龍虎塔 — 港都經典</p>
+  <p style="margin-top: 0.3rem;"><a href="index.html">回首頁</a> · <a href="kpmc.html">高雄流行音樂中心</a> · <a href="85.html">85 大樓</a></p>
+  <p style="margin-top: 0.3rem; font-size:0.8rem;">資料來源：高雄市政府、高雄旅遊網、維基百科 | 僅供參考</p>
+</footer>
+
+</body>
+</html>

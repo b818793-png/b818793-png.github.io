@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高雄流行音樂中心 — 港都經典</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+    background: #0b0e14;
+    color: #e8edf5;
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+  .hero {
+    position: relative;
+    height: 70vh;
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(135deg, #0f172a 0%, #1a2332 50%, #0d1b2a 100%);
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 60%, rgba(0,180,216,0.25) 0%, transparent 50%), radial-gradient(ellipse at 70% 30%, rgba(247,127,0,0.12) 0%, transparent 50%);
+    z-index: 1;
+  }
+  .hero-content { position: relative; z-index: 2; padding: 2rem; }
+  .hero h1 {
+    font-size: clamp(2.4rem, 7vw, 5rem);
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    background: linear-gradient(135deg, #fca311, #ffb703, #fca311);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.3rem;
+  }
+  .hero .sub {
+    font-size: clamp(0.9rem, 2vw, 1.3rem);
+    font-weight: 300;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.3em;
+  }
+  .hero .back-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.5rem 1.8rem;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 30px;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    transition: all 0.25s;
+  }
+  .hero .back-link:hover { border-color: #fca311; color: #fca311; }
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(11,14,20,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06); padding: 0 1rem;
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto; display: flex; gap: 0;
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav a {
+    flex: 1; min-width: 100px; padding: 0.9rem 0.5rem; text-align: center;
+    text-decoration: none; color: rgba(255,255,255,0.55); font-size: 0.9rem;
+    font-weight: 500; letter-spacing: 0.06em; border-bottom: 2px solid transparent;
+    transition: all 0.25s; white-space: nowrap;
+  }
+  .nav a:hover, .nav a.active { color: #fca311; border-bottom-color: #fca311; }
+  section { padding: 4rem 1rem; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .section-title {
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700;
+    margin-bottom: 0.3rem; letter-spacing: 0.04em;
+  }
+  .section-sub {
+    font-size: 1rem; color: rgba(255,255,255,0.4);
+    margin-bottom: 2.5rem; letter-spacing: 0.15em;
+  }
+  .feature-img {
+    width: 100%; border-radius: 16px; margin-bottom: 2.5rem;
+    display: block;
+  }
+  .intro-text {
+    max-width: 800px; margin: 0 auto 2.5rem;
+    text-align: center; font-weight: 300; color: rgba(255,255,255,0.75);
+    font-size: 1.05rem;
+  }
+  .card-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;
+  }
+  .card {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px; padding: 1.8rem 1.8rem 2.2rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+  .card-icon { font-size: 2rem; margin-bottom: 0.6rem; display: block; }
+  .card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.8rem; color: #fca311; }
+  .card p, .card li { font-size: 0.95rem; color: rgba(255,255,255,0.78); font-weight: 300; }
+  .card ul { list-style: none; padding: 0; }
+  .card li { padding: 0.3rem 0; padding-left: 1.2rem; position: relative; }
+  .card li::before { content: '▸'; position: absolute; left: 0; color: #fca311; }
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 6px; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(to bottom, #fca311, transparent);
+  }
+  .tl-item { position: relative; margin-bottom: 1.4rem; }
+  .tl-item::before {
+    content: ''; position: absolute; left: -2rem; top: 0.5rem;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: #fca311; border: 2px solid #0b0e14;
+  }
+  .tl-item .year { font-weight: 700; color: #fca311; font-size: 0.95rem; }
+  .tl-item p { color: rgba(255,255,255,0.7); font-weight: 300; font-size: 0.9rem; }
+  .transport-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem;
+  }
+  .tp-item {
+    background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px; padding: 1.2rem 1.4rem;
+  }
+  .tp-item .mode { font-weight: 700; font-size: 1rem; margin-bottom: 0.3rem; color: #ffb703; }
+  .tp-item p { font-size: 0.88rem; color: rgba(255,255,255,0.65); font-weight: 300; }
+  .info-block {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.2rem;
+    margin-top: 2rem;
+  }
+  .info-item {
+    background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px; padding: 1.2rem 1.4rem; text-align: center;
+  }
+  .info-item .label { font-size: 0.8rem; color: rgba(255,255,255,0.35); letter-spacing: 0.1em; }
+  .info-item .value { font-size: 1.1rem; font-weight: 500; color: #fca311; margin-top: 0.2rem; }
+  .gallery {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;
+    margin: 2rem 0;
+  }
+  .gallery-item {
+    aspect-ratio: 4 / 3; border-radius: 12px; overflow: hidden;
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.2); font-size: 0.9rem;
+  }
+  .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+  @media (max-width: 768px) {
+    .card-grid { grid-template-columns: 1fr; }
+    .nav a { font-size: 0.78rem; min-width: 80px; }
+    section { padding: 3rem 1rem; }
+    .hero { height: 60vh; min-height: 320px; }
+  }
+  footer {
+    text-align: center; padding: 3rem 1rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    color: rgba(255,255,255,0.25); font-size: 0.85rem; font-weight: 300;
+  }
+  footer a { color: rgba(255,255,255,0.35); text-decoration: none; }
+  footer a:hover { color: #fca311; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-content">
+    <h1>高雄流行音樂中心</h1>
+    <p class="sub">Kaohsiung Music Center</p>
+    <p style="margin-top:0.8rem; color:rgba(255,255,255,0.5); font-weight:300; font-size:0.95rem;">音浪塔 · 鯨魚堤岸 · 珊瑚礁群 · 海豚步道</p>
+    <a href="index.html" class="back-link">← 返回首頁</a>
+  </div>
+</header>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#overview">概覽</a>
+    <a href="#history">歷史沿革</a>
+    <a href="#features">建築特色</a>
+    <a href="#traffic">交通方式</a>
+    <a href="lotus.html">蓮池潭龍虎塔</a>
+    <a href="85.html">85 大樓</a>
+    <a href="index.html">回首頁</a>
+  </div>
+</nav>
+
+<section id="overview">
+<div class="section-inner">
+  <h2 class="section-title">概覽</h2>
+  <p class="section-sub">About Kaohsiung Music Center</p>
+  <img src="P001.png" alt="高雄流行音樂中心" class="feature-img">
+  <p class="intro-text">座落於高雄港 11–15 號碼頭（真愛碼頭、光榮碼頭），佔地約 11.89 公頃。由西班牙建築師 Manuel Alvarez Monteserin Lahoz 與台灣翁祖模建築師事務所聯手設計，以「海洋」為核心語彙，打造出音浪塔、鯨魚堤岸、珊瑚礁群、海豚步道等造型前衛的建築群，2021 年正式開幕後旋即成為港都最耀眼的門戶地標。</p>
+  <div class="info-block">
+    <div class="info-item"><div class="label">開幕年份</div><div class="value">2021</div></div>
+    <div class="info-item"><div class="label">佔地面積</div><div class="value">11.89 公頃</div></div>
+    <div class="info-item"><div class="label">建築師</div><div class="value">Manuel Lahoz</div></div>
+    <div class="info-item"><div class="label">地址</div><div class="value">鹽埕區真愛路 1 號</div></div>
+  </div>
+</div>
+</section>
+
+<section id="history" style="background: rgba(255,255,255,0.015);">
+<div class="section-inner">
+  <h2 class="section-title">歷史沿革</h2>
+  <p class="section-sub">從新十大建設到南台灣音樂重鎮</p>
+  <div class="card-grid">
+    <div class="card">
+      <span class="card-icon">&#x1F4DC;</span>
+      <h3>發展歷程</h3>
+      <div class="timeline">
+        <div class="tl-item"><span class="year">2003</span><p>行政院核定「新十大建設」，南部流行音樂中心列入規劃</p></div>
+        <div class="tl-item"><span class="year">2009</span><p>更名「海洋文化及流行音樂中心」，遷址至高雄港 11–15 號碼頭</p></div>
+        <div class="tl-item"><span class="year">2011</span><p>國際競圖由西班牙 Lahoz 團隊獲首獎，三月簽約</p></div>
+        <div class="tl-item"><span class="year">2014–2020</span><p>第一、二階段工程陸續動工、竣工，總經費約 69.56 億元</p></div>
+        <div class="tl-item"><span class="year">2021.10.31</span><p>正式開幕，總統蔡英文、市長陳其邁揭幕；同年舉辦第 12 屆金音創作獎</p></div>
+        <div class="tl-item"><span class="year">2024–迄今</span><p>推出常設互動展，全年超過百場演唱會，成為南台灣音樂重鎮</p></div>
+      </div>
+    </div>
+    <div class="card">
+      <span class="card-icon">&#x1F3A4;</span>
+      <h3>重要里程碑</h3>
+      <ul>
+        <li>全台唯一 3D 沉浸式音響室內展演館——海音館（4,000–6,000 人）</li>
+        <li>海風廣場可容納 8,000–10,000 人戶外演出</li>
+        <li>2021 年獲全球卓越建設金獎</li>
+        <li>第 12 屆金音創作獎頒獎典禮場地</li>
+        <li>行政法人營運，培養在地音樂人才</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="features">
+<div class="section-inner">
+  <h2 class="section-title">建築特色</h2>
+  <p class="section-sub">以海洋為母題的建築群</p>
+  <div class="card-grid">
+    <div class="card">
+      <span class="card-icon">&#x1F3DB;&#xFE0F;</span>
+      <h3>音浪塔</h3>
+      <p>六層樓高、高度約 42 公尺的主場館，外觀以波浪造型曲面玻璃構成，白天捕捉光影變化、夜間配合 LED 燈光演出。內部設有台灣首座 3D 沉浸式音響系統的海音館。</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">&#x1F433;</span>
+      <h3>鯨魚堤岸</h3>
+      <p>六棟獨立展演空間（200–1,000 席），屋頂曲線如鯨豚浮出水面。進駐電競館、沉浸式劇院、原民主題餐廳等多元業種，形成複合式藝文聚落。</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">&#x1F31F;</span>
+      <h3>珊瑚礁群</h3>
+      <p>以珊瑚礁有機輪廓為靈感的商業空間，連結遊艇碼頭與水岸步道。採低密度開發，保留開闊視野，讓海風與綠意貫穿園區。</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">&#x1F30A;</span>
+      <h3>海豚步道</h3>
+      <p>沿高雄港岸線鋪設的景觀步道，串聯真愛碼頭與光榮碼頭。沿途設置休憩平台、裝置藝術，可近距離欣賞港區船舶與夕陽。</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">&#x1F30D;</span>
+      <h3>海風廣場</h3>
+      <p>大型戶外演出場地，可容納 8,000–10,000 人。以弧形草坪與階梯座椅構成，面向高雄港主航道，觀眾可在海風吹拂下享受音樂盛宴。</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">&#x1F303;</span>
+      <h3>水岸廊帶</h3>
+      <p>串聯駁二藝術特區、高雄展覽館、新光碼頭，形成長約 3 公里的水岸文化廊帶。輕軌真愛碼頭站與光榮碼頭站貫穿園區，交通便捷。</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="traffic" style="background: rgba(255,255,255,0.015);">
+<div class="section-inner">
+  <h2 class="section-title">交通方式</h2>
+  <p class="section-sub">如何抵達高雄流行音樂中心</p>
+  <div class="transport-grid">
+    <div class="tp-item"><div class="mode">輕軌</div><p>C11 真愛碼頭站、C10 光榮碼頭站，出站即達</p></div>
+    <div class="tp-item"><div class="mode">捷運</div><p>紅線 R8 三多商圈站 1 號出口轉紅 18；或 R9 中央公園站轉 100 號公車</p></div>
+    <div class="tp-item"><div class="mode">公車</div><p>大成街口（11、25、33、50、214A/B、0 南北）；高雄女中（77、168 環狀）</p></div>
+    <div class="tp-item"><div class="mode">YouBike</div><p>珊瑚礁群、音浪塔、LIVE WAREHOUSE 旁皆有站點</p></div>
+    <div class="tp-item"><div class="mode">開車</div><p>真愛路停車場 239 格、海邊路停車場 24h</p></div>
+  </div>
+  <div style="margin-top: 2rem; text-align: center;">
+    <a href="index.html" style="display:inline-block; padding:0.6rem 2rem; border:1px solid rgba(255,255,255,0.12); border-radius:30px; color:rgba(255,255,255,0.5); text-decoration:none; font-size:0.9rem; letter-spacing:0.1em; transition:all 0.25s;" onmouseover="this.style.borderColor='#fca311'; this.style.color='#fca311';" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'; this.style.color='rgba(255,255,255,0.5';">← 返回首頁</a>
+  </div>
+</div>
+</section>
+
+<footer>
+  <p>高雄流行音樂中心 — 港都經典</p>
+  <p style="margin-top: 0.3rem;"><a href="index.html">回首頁</a> · <a href="lotus.html">蓮池潭龍虎塔</a> · <a href="85.html">85 大樓</a></p>
+  <p style="margin-top: 0.3rem; font-size:0.8rem;">資料來源：高雄市政府、高雄旅遊網、維基百科 | 僅供參考</p>
+</footer>
+
+</body>
+</html>

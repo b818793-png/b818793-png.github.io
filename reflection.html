@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>課堂心得 — 生成式 AI 與多媒體製作</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+    background: #0b0e14;
+    color: #e8edf5;
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+  .hero {
+    position: relative;
+    height: 60vh;
+    min-height: 360px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(135deg, #0f172a 0%, #1a2332 50%, #0d1b2a 100%);
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 40%, rgba(0,180,216,0.18) 0%, transparent 50%), radial-gradient(ellipse at 70% 60%, rgba(114,9,183,0.12) 0%, transparent 50%);
+    z-index: 1;
+  }
+  .hero-content { position: relative; z-index: 2; padding: 2rem; }
+  .hero h1 {
+    font-size: clamp(2rem, 6vw, 4rem);
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    background: linear-gradient(135deg, #fca311, #ffb703, #fca311);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.3rem;
+  }
+  .hero .sub {
+    font-size: clamp(0.85rem, 1.8vw, 1.1rem);
+    font-weight: 300;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.2em;
+  }
+  .hero .back-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.5rem 1.8rem;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 30px;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    transition: all 0.25s;
+  }
+  .hero .back-link:hover { border-color: #fca311; color: #fca311; }
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(11,14,20,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06); padding: 0 1rem;
+  }
+  .nav-inner {
+    max-width: 800px; margin: 0 auto; display: flex; gap: 0;
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav a {
+    flex: 1; min-width: 90px; padding: 0.9rem 0.5rem; text-align: center;
+    text-decoration: none; color: rgba(255,255,255,0.55); font-size: 0.9rem;
+    font-weight: 500; letter-spacing: 0.06em; border-bottom: 2px solid transparent;
+    transition: all 0.25s; white-space: nowrap;
+  }
+  .nav a:hover, .nav a.active { color: #fca311; border-bottom-color: #fca311; }
+  .article {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 4rem 1.5rem;
+  }
+  .article .meta {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.1em;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .article h2 {
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    font-weight: 700;
+    color: #fca311;
+    margin: 2.2rem 0 1rem;
+    letter-spacing: 0.03em;
+  }
+  .article p {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.78);
+    margin-bottom: 1.2rem;
+    text-indent: 2em;
+  }
+  .article .divider {
+    text-align: center;
+    color: rgba(255,255,255,0.1);
+    font-size: 1.5rem;
+    margin: 2rem 0;
+    letter-spacing: 0.5em;
+  }
+  .back-bottom {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .back-bottom a {
+    display: inline-block;
+    padding: 0.6rem 2rem;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 30px;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    transition: all 0.25s;
+  }
+  .back-bottom a:hover { border-color: #fca311; color: #fca311; }
+  @media (max-width: 640px) {
+    .article { padding: 2.5rem 1.2rem; }
+    .hero { height: 50vh; min-height: 280px; }
+    .nav a { font-size: 0.78rem; min-width: 70px; }
+  }
+  footer {
+    text-align: center; padding: 3rem 1rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    color: rgba(255,255,255,0.25); font-size: 0.85rem; font-weight: 300;
+  }
+  footer a { color: rgba(255,255,255,0.35); text-decoration: none; }
+  footer a:hover { color: #fca311; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-content">
+    <h1>課堂心得</h1>
+    <p class="sub">「生成式 AI 與多媒體製作」</p>
+    <a href="index.html" class="back-link">← 返回首頁</a>
+  </div>
+</header>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#s1">思維轉變</a>
+    <a href="#s2">工具體驗</a>
+    <a href="#s3">反思展望</a>
+    <a href="index.html">回首頁</a>
+  </div>
+</nav>
+
+<div class="article">
+  <div class="meta">課程反思 · 人機協同創作</div>
+
+  <h2 id="s1">一、核心收穫：思維的轉變</h2>
+  <p>這門課顛覆了我對多媒體創作的認知。過去製作影音需要耗費大量時間在軟體操作上，但透過這門課，我學會了如何利用提示詞（Prompts）與 AI 協同創作。這讓我意識到，未來的核心競爭力不再是技術熟練度，而是「創意企劃」與「問題解決」的能力。</p>
+
+  <div class="divider">* * *</div>
+
+  <h2 id="s2">二、工具體驗與實務應用</h2>
+  <p>在課堂實作中，AI 在視覺圖像生成與動態影片打樣上展現了驚人的效率。只需幾秒鐘就能產出高質感的概念圖，大大縮短了初期分鏡（Storyboard）的溝通成本。雖然部分技術在細節上仍有優化空間，但這套「人機協同」的工作流已展現出強大的實用性。</p>
+
+  <div class="divider">* * *</div>
+
+  <h2 id="s3">三、反思與未來展望</h2>
+  <p>AI 雖然降低了創作門檻，但作品的靈魂依然取決於創作者的美感把關與情感堆疊。這門課讓我解脫了繁瑣的數位勞動，能更專注於「講好一個故事」。未來我將持續探索 AI 工具，將其轉化為提升作品質感的強大副駕駛。</p>
+
+  <div class="back-bottom">
+    <a href="index.html">← 返回首頁</a>
+  </div>
+</div>
+
+<footer>
+  <p>「生成式 AI 與多媒體製作」課堂心得</p>
+  <p style="margin-top: 0.3rem;"><a href="index.html">回首頁</a> · <a href="kpmc.html">高雄流行音樂中心</a> · <a href="lotus.html">蓮池潭龍虎塔</a> · <a href="85.html">85 大樓</a></p>
+</footer>
+
+</body>
+</html>
